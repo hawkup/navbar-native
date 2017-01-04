@@ -132,7 +132,7 @@ export default class Navbar extends Component {
     }
 
     renderImage() {
-
+        const titleCenter = this.props.titleCenter;
         const image = <Image
             source={this._getImageTitleSource(this.props.image)}
             resizeMode={this._getImageResizeMode(this.props.image)}
@@ -140,6 +140,7 @@ export default class Navbar extends Component {
         />;
 
         switch (true) {
+            case (titleCenter):
             case (isIOS()):
                 return (
                     <View style={styles.navBarTitleContainer}>
@@ -153,7 +154,9 @@ export default class Navbar extends Component {
 
     renderTitle() {
         const titleColor = {color: (this.props.titleColor) ? this.props.titleColor : theme[this.theme].titleColor};
+        const titleCenter = this.props.titleCenter;
         switch (true) {
+            case (titleCenter && !!this.props.title && typeof this.props.title === "string"):
             case (isIOS() && !!this.props.title && typeof this.props.title === "string"):
                 return (
                     <View style={styles.navBarTitleContainer}>
@@ -264,7 +267,9 @@ export default class Navbar extends Component {
 
     renderLeftButton() {
         const left = this.props.left;
+        const titleCenter = this.props.titleCenter;
         switch (true) {
+            case (titleCenter && Array.isArray(left)):
             case (isIOS() && Array.isArray(left)):
                 return (
                     <View style={styles.navBarMultiButtonContainer}>
@@ -273,6 +278,7 @@ export default class Navbar extends Component {
                         })}
                     </View>
                 );
+            case (titleCenter && typeof left === 'object'):
             case (isIOS() && typeof left === 'object'):
                 return this.renderButton(left, 'left', 'left', 'right', 'left');
             case (!iOS() && Array.isArray(left)):
@@ -330,7 +336,7 @@ export default class Navbar extends Component {
     }
 
     render() {
-        const renderTitle = isIOS() ? this.renderTitle() : null;
+        const renderTitle = (isIOS() || this.props.titleCenter) ? this.renderTitle() : null;
         const bgColor = { backgroundColor: this.props.bgColor ? this.props.bgColor : theme[this.theme].bgNavbarColor };
         return (
             <View style={[styles.navBarContainer, bgColor]} elevation={this.props.elevation}>
@@ -423,6 +429,7 @@ Navbar.propTypes = {
         PropTypes.element
     ]),
     titleColor: PropTypes.string,
+    titleCenter: PropTypes.bool,
     bgColor: PropTypes.string,
     image: PropTypes.shape(Navbar.imagePropTypes),
     imageBackground: PropTypes.shape(Navbar.imagePropTypes),
