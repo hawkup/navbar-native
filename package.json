@@ -17,7 +17,7 @@
   ],
   "dependencies": {
     "react-native-keyboard-aware-scroll-view": "^0.2.1",
-    "react-native-vector-icons": "~2.1.0",
+    "react-native-vector-icons": "~4.0.0",
     "react-native-spinkit": "~0.1.3"
   },
   "author": "Fabio Fumis <f.fumis@gmail.com> (https://github.com/redbaron76)",
