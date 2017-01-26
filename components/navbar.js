@@ -196,6 +196,13 @@ export default class Navbar extends Component {
         return null;
     }
 
+    renderIconImage(props) {
+        if (!!props.image) {
+            return <Image source={props.image} resizeMode={props.imageResizeMode} style={props.imageStyle} />
+        }
+        return null;
+    }
+
     renderLabel(props) {
         switch (true) {
             case (props.role == LOGIN):
@@ -258,6 +265,7 @@ export default class Navbar extends Component {
                         badge={props.badge}
                     >
                         {this.renderIcon(props, icon1_1, icon1_2)}
+                        {this.renderIconImage(props)}
                         {this.renderLabel(props)}
                         {this.renderIcon(props, icon2_1, icon2_2)}
                     </Button>
@@ -374,6 +382,12 @@ export default class Navbar extends Component {
         iconPos: PropTypes.string,
         iconSize: PropTypes.number,
         iconColor: PropTypes.string,
+        image: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.number,
+        ]),
+        imageStyle: PropTypes.object,
+        imageResizeMode: PropTypes.string,
         label: PropTypes.string,
         badge: PropTypes.oneOfType([
             PropTypes.number,
