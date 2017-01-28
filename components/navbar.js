@@ -198,7 +198,11 @@ export default class Navbar extends Component {
 
     renderIconImage(props) {
         if (!!props.image) {
-            return <Image source={props.image} resizeMode={props.imageResizeMode} style={props.imageStyle} />
+            return (
+              <View>
+                <Image source={props.image} resizeMode={props.imageResizeMode} style={props.imageStyle} />
+              </View>
+            );
         }
         return null;
     }
